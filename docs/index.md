@@ -1,10 +1,10 @@
 # Overview
 
 <!-- markdownlint-disable MD026 -->
-## What Is Argo CD?
+## Argo CD란 무엇인가??
 <!-- markdownlint-enable MD026 -->
 
-Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes.
+Argo CD는 선언적이고, GitOps를 활용한 쿠버네티스 CD 도구이다.
 
 ![Argo CD UI](assets/argocd-ui.gif)
 
