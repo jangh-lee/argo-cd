@@ -1,5 +1,5 @@
-# Resource Hooks
-## Overview
+# 리소스 훅(Resource Hooks)
+## 개요
 
 Synchronization can be configured using resource hooks. Hooks are ways to run scripts before, during,
 and after a Sync operation. Hooks can also be run if a Sync operation fails at any point. Some use cases for hooks are:
@@ -10,8 +10,9 @@ Kubernetes rolling update strategy.
 * Using a `PostSync` hook to run integration and health checks after a deployment.
 * Using a `SyncFail` hook to run clean-up or finalizer logic if a Sync operation fails. _`SyncFail` hooks are only available starting in v1.2_
 
-## Usage
+## 사용법
 
+리소스 훅은 쿠버네티스 매니페스트를 통해 간단하게 구현할 수 있습니다. Argo CD 애플리케이션의 어노테이션에 `argocd.argoproj.io/hook`를 넣어서 사용하면 됩니다. 에를 들어:
 Hooks are simply Kubernetes manifests tracked in the source repository of your Argo CD Application annotated with `argocd.argoproj.io/hook`, e.g.:
 
 ```yaml
@@ -23,13 +24,14 @@ metadata:
     argocd.argoproj.io/hook: PreSync
 ```
 
+Sync(동기화) 작동 간에, Argo CD는 
 During a Sync operation, Argo CD will apply the resource during the appropriate phase of the
 deployment. Hooks can be any type of Kubernetes resource kind, but tend to be Pod,
 [Job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)
 or [Argo Workflows](https://github.com/argoproj/argo). Multiple hooks can be specified as a comma
 separated list.
 
-The following hooks are defined:
+훅의 정의는 다음과 같습니다.
 
 | Hook | Description |
 |------|-------------|
@@ -39,17 +41,16 @@ The following hooks are defined:
 | `PostSync` | Executes after all `Sync` hooks completed and were successful, a successful application, and all resources in a `Healthy` state. |
 | `SyncFail` | Executes when the sync operation fails. _Available starting in v1.2_ |
 
-### Generate Name
+### 이름 생성
 
 Named hooks (i.e. ones with `/metadata/name`) will only be created once. If you want a hook to be re-created each time either use `BeforeHookCreation` policy (see below) or `/metadata/generateName`. 
 
-## Selective Sync
-
+## 선택적 동기화
+훅은 선택적 동기화 동안에는 실행되지 않습니다.
 Hooks are not run during [selective sync](selective_sync.md).
 
-## Hook Deletion Policies
-
-Hooks can be deleted in an automatic fashion using the annotation: `argocd.argoproj.io/hook-delete-policy`.
+## 훅 삭제 정책
+훅은 `argocd.argoproj.io/hook-delete-policy` 어노테이션을 통해 자동으로 삭제할 수 있습니다.
 
 ```yaml
 apiVersion: batch/v1
