@@ -1,7 +1,6 @@
 # 선택적 동기화 (Selective Sync)
 
-*선택적 동기화*는 동기화할 리소스를 말합니다. 어떤 리소스를 동기화할지 UI에서 선택할 수 있습니다. is one where only some resources are sync'd. You can choose which resources from the UI:
-
+*선택적 동기화*는 일부 리소스만 동기화하는 것을 말합니다. 어떤 리소스를 동기화할지 UI에서 선택할 수 있습니다. :
 ![selective sync](../assets/selective-sync.png)
 
 선택적 동기화를 할 때, 주의사항입니다.
